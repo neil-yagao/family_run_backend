@@ -8,7 +8,7 @@ module.exports = {
 		dialect:'mysql'
 	},
 	fileStore:{
-		location:'/static/images'
+		location:process.env.NODE_ENV=='production'?'/static/images':'.'
 	},
 	env:'PROD'
 

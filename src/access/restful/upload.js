@@ -62,7 +62,7 @@ router.post('/:type/:id', cors(), upload.any(), function (req, res) {
 
 
 function toFileName(req) {
-	return req.params.type + '-' + req.params.id + "-"
+	return req.params.type + '-' + req.params.id + "-" + req._startTime.getTime();
 }
 
 module.exports = router;

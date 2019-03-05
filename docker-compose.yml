@@ -2,11 +2,11 @@ version: '2.1'
 
 services:
   team_run_backend:
-    image: team_run_backend
-    build: .
+    image: team_run_backend:0.2
+    # build: .
     environment:
       NODE_ENV: production
-      MYSQL_URL: 10.165.18.63
+      MYSQL_URL: rm-bp1158p1p9eltip58.mysql.rds.aliyuncs.com
     ports:
       - 3000:3000
     volumes:

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-IMAGE_NAME="family_run_backend:$1"
+IMAGE_NAME="team_run_backend:$1"
 echo $1
 if [ -e $1 ] ;then 
 	echo "unable to identify version"
