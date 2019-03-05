@@ -6,9 +6,11 @@ var assign = require('lodash/assign');
 var task = assign({}, {
 	name: Sequelize.STRING,
 	title: Sequelize.STRING,
-	description: Sequelize.STRING,
+	description: Sequelize.TEXT,
 	dueDate: Sequelize.STRING,
 	status: Sequelize.STRING,
+	createdById:Sequelize.STRING,
+	currentAssignmentId:Sequelize.STRING,
 	visible:{
 		type:Sequelize.TINYINT,
 		defaultValue:1

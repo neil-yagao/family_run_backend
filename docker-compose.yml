@@ -6,5 +6,10 @@ services:
     build: .
     environment:
       NODE_ENV: production
+      MYSQL_URL: 10.165.18.63
     ports:
       - 3000:3000
+    volumes:
+      - image:/static/images
+volumes:
+  image:

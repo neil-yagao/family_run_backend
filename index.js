@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./conf/app')
 var schema = require( "./src/access/schema/");
+var upload = require('./src/access/restful/upload');
 
 const server = new ApolloServer({
 	schema:schema
@@ -30,6 +31,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use('/static',express.static(config.fileStore.location));
+app.use('/upload',upload)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

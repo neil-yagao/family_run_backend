@@ -9,7 +9,8 @@ var userTaskOperation = assign({}, {
 	taskId:Sequelize.STRING,
 	operation:Sequelize.STRING,
 	operationDate:Sequelize.STRING,
-	operationTimestamp:Sequelize.STRING
+	operationTimestamp:Sequelize.STRING,
+    target:Sequelize.STRING
 }, BaseModel)
 const UserTask = instance.define('User_Task_Operation',
     userTaskOperation,{

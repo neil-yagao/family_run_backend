@@ -4,18 +4,17 @@ var BaseModel = require('./base');
 var assign = require('lodash/assign');
 
 
-var user = assign({}, {
-    name: Sequelize.STRING,
-    accountId: Sequelize.STRING,
-	headPicId:Sequelize.STRING,
+var account = assign({}, {
+    username: Sequelize.STRING,
+    password: Sequelize.STRING,
 }, BaseModel)
-const User = instance.define('User',
-    user,{
+const Account = instance.define('Account',
+    account,{
         timestamps:true,
         paranoid:true
     }
 );
 
-User.sync();
+Account.sync();
 
-module.exports = User;
+module.exports = Account;

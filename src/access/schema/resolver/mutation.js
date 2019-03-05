@@ -6,7 +6,22 @@ var moment = require('moment');
 const mutation = {
 	Mutations: {
 		addTask(_, args) {
-			return Tasks.create(args.task);
+			let taskInfo = args.task // Tasks.create(;
+			let newTaskPromise = [];
+			if (taskInfo.assignTo && taskInfo.assignTo.push) {
+				taskInfo.assignTo.forEach(assignTo => {
+					newTaskPromise.push(Tasks.create({
+						...taskInfo,
+						createdById: taskInfo.createdBy,
+						currentAssignmentId: assignTo
+					}))
+				})
+				console.log('new tasks',newTaskPromise)
+				return Promise.all(newTaskPromise).then(result=>{
+					return "success"
+				})
+			}
+			throw "无法确定任务执行人！"
 		},
 		operateTask(_, {
 			taskId,
@@ -24,14 +39,14 @@ const mutation = {
 					return task.save()
 				}, {
 					transaction: t
-				}).then((t) => {
+				}).then((newTask) => {
 					let savingOperation = {
 						userId: operation.operator,
 						taskId: taskId,
 						...operation
 					}
 					UserTaskOperation.create(savingOperation)
-					return t
+					return newTask
 				}, {
 					transaction: t
 				})
@@ -42,8 +57,8 @@ const mutation = {
 			task
 		}) {
 			return Tasks.findById(taskId).then((t) => {
-				for(let key in task){
-					if(task.hasOwnProperty(key)){
+				for (let key in task) {
+					if (task.hasOwnProperty(key)) {
 						t[key] = task[key]
 					}
 				}

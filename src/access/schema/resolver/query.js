@@ -1,27 +1,39 @@
 var Tasks = require('../../../db/mysql/model/task')
-var Users = require('../../../db/mysql/model/user') 
+var Account = require('../../../db/mysql/model/account')
+var User = require('../../../db/mysql/model/user')
+var Op = require('sequelize').Op;
 const query = {
 	Query: {
-		tasks(_, args) {
+		tasks(_, {task}) {
 			let condition = {};
 			condition.where = {
-				...args.task
+				...task
 			}
-			console.log('condition',condition)
+			if(task.assignTo && task.assignTo.length > 0){
+				condition.where['currentAssignmentId'] = {
+					[Op.in]:task.assignTo
+				}
+			}
+			delete condition.where.assignTo;
+			console.log('condition', condition)
 			return Tasks.findAll(condition)
 		},
 		login(_, {
 			username,
 			password
 		}) {
-			return Users.findAll({
+			return Account.findAll({
 				where: {
 					username,
 					password
 				}
 			}).then(accounts => {
 				if (accounts && accounts.length > 0) {
-					return Player.findById(accounts[0].userId)
+					return User.findOne({
+						where: {
+							accountId: accounts[0].id
+						}
+					})
 				}
 				throw JSON.stringify({
 					success: false,
@@ -29,6 +41,11 @@ const query = {
 					msg: 'username or password is incorrect'
 				})
 			})
+		},
+		findUserById(_, {
+			userId
+		}) {
+			return User.findById(userId);
 		}
 	}
 }

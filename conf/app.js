@@ -8,7 +8,7 @@ module.exports = {
 		dialect:'mysql'
 	},
 	fileStore:{
-		location:'/Users/neil/Project/img'
+		location:'/static/images'
 	},
 	env:'PROD'
 

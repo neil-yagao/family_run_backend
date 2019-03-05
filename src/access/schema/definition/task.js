@@ -6,6 +6,8 @@ const Task = `
 		dueDate:String
 		status:String
 		visible:Int
+		createdBy:User
+		currentAssignment:User
 	}
 
 	input TaskInput {
@@ -14,11 +16,14 @@ const Task = `
 		dueDate:String
 		status:String
 		visible:Int
+		createdBy:String
+		assignTo:[String]
 	}
 
 	input TaskOperationInput {
 		operation:String!
 		operator:String!
+		target:String
 		operatingDate:String!
 		operatingTimestamp:String!
 	}
