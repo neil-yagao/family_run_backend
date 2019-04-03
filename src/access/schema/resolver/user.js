@@ -11,17 +11,18 @@ const resolveMap = {
 			}
 			return ImageModel.findOne({
 				where: {
+					type: "head",
 					relatedId: user.id
 				}
 			})
 		},
-		groups(user) {
-			return Image.findAll({
+		avatar(user) {
+			return ImageModel.findOne({
 				where: {
-					type: 'course',
-					userId: user.id
+					type: "avatar",
+					relatedId: user.id
 				}
-			}) || [];
+			})
 		}
 	}
 

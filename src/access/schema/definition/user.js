@@ -14,7 +14,7 @@ const User = `
 		id:String!
 		name:String
 		headPic:Image
-		groups:[String]
+		avatar:Image
 	}
 
 	input UserInput {
